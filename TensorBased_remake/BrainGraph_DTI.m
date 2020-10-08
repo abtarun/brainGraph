@@ -1,0 +1,32 @@
+%-----------------------------------------------------------------------
+% 2018-2020 - Created by: Anjali Tarun
+% Initialize build of voxel-level brain graph
+%-----------------------------------------------------------------------
+
+
+function param = BrainGraph_DTI(param)
+
+        % Extracts tensors using FSL
+        
+        ExtractTensors(param)
+        
+        % Reads the diffusion data (DTI tensor)
+        [dtitensor, param.DTI.mask] = ReadDTI(param,param.DTI.DiffusionDatapath);
+
+        disp('Constructing the filter..')
+        
+        % Constructs the filter by discretizing the DTI tensor
+        
+        [param.DTI.filter,param.DTI.FA] = discretize_filter(dtitensor);
+
+        % Constructs the brain graph
+
+        disp('Constructing the graph...')
+        
+        param.DTI.WB.A = Graph_construct(param.DTI.filter,param.DTI.FA,param.DTI.mask,param.alpha);
+
+        param.DTI.WB.numNodes = length(param.DTI.WB.A);
+        
+        param.DTI.indices_wb = find(param.DTI.mask);
+
+end
