@@ -12,8 +12,9 @@
 %     designs, and a comparison of their spectrum (values used to plot the 
 %     error curve as a function of # of eigenmodes)
 % 
-%     1. Returns whole-brain graph (WM+CSF+GM) for DTI, ODF3,ODF5, and the 
-%        geometrically weighted GM + ODF structured WM graph (GMWM).
+%     1. Returns voxel-level whole-brain graph encoding local structures
+%        from DTI, ODF3,ODF5, and the geometrically weighted GM + ODF 
+%        structured WM graph (GMWM).
 %     2. Runs the eigendecomposition of the Laplacian for each type of 
 %        braingraph, and saves the eigenmodes to nifti format, subject space.
 %     3. Creates Dartel templates for the set of subjects to be analyzed,
